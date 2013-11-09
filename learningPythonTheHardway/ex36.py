@@ -195,7 +195,7 @@ def goldenChest():
     print "You found an empty box..."
     print "sorry about your luck"
   print "\n Return to continue"
-  raw_imput(' >')
+  raw_input(' >')
   clearScreen()
  
  
@@ -278,7 +278,7 @@ def journey():
   
     print "\nYou continue on your jouney."
     print "You come to a large open area, where the sun shines down from an"
-    print "opening in the ceiling of the cave
+    print "opening in the ceiling of the cave"
     print "There are also 3 doors."
     print "\n1) A wooden door."
     print "2) A door made with bones."
