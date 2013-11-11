@@ -15,6 +15,7 @@ import time
 import platform
 
 # Variables - weapons
+
 axeOwner = 0
 swordOwner = 0
 maceOwner = 0
@@ -44,7 +45,7 @@ ______
 | | | | | | | '_ \ / _` |/ _ \/ _ \| '_ \ 
 | |/ /| |_| | | | | (_| |  __/ (_) | | | |
 |___/  \__,_|_| |_|\__, |\___|\___/|_| |_|
-                    __/ |             v0.9b       
+                    __/ |             v1.0a       
                    |___/ 
 '''
 
@@ -99,7 +100,7 @@ def clearScreen():
     system('cls')
   else:
     system('clear')
-
+  
 ''' ogre attack function, with random chance of surival based on weapon'''
 def ogreAttack():
 
@@ -125,16 +126,20 @@ def dragonAttack():
   print "\nthe dragon has smoke rolling from his nose"
   print "and snorts fire in your direction as he approaches"
   raw_input('\n Press enter to continue.> ')
-  chance1 = 99 #choice(range(0,3))
+  chance1 = choice(range(0,5))
   if chance1 == 1:
     print "\nThe dragon passes you without a second look."
   else:
     global axeOwner
-    if axeOwner == 1:
-      print "\nYou slay the dragon with your axe!"
+    chance2 = choice(range(0,5))
+    if chance2 == 1:
+      death()
     else:
-      print "Some how you slay the dragon with your fists!"
-  corpseLooter()
+      if axeOwner == 1:
+        print "\nYou slay the dragon with your axe!"
+      else:
+        print "Some how you slay the dragon with your fists!"
+      corpseLooter()
 
  
 
@@ -184,17 +189,6 @@ def goldenChest():
  
 
 
-### this is where you die!!!
-def death():
-  global resurrectionPotion
-  if resurrectionPotion >= 1:
-    print "Lucky you had a potion, you awaken several days later"
-    pass
-  else:
-    exit("You died something horrible")
-
-    
- 
 ### this is where you crawl!!!
 def crawling():
   clearScreen()
@@ -216,9 +210,6 @@ def crawling():
   else:
     pass
 
-    
-    
-    
 
 def steelGate():
   chance1 = choice(range(0,3))
@@ -265,9 +256,9 @@ def journey():
   neverEnding = 0
   while neverEnding < 666:
     print '\nAs you continue on your jouney you come to'
-    print 'a room where there is a small cave on one side of the'
-    print 'room and a heavy looking steel gate on the other. Which'
-    print 'way do you go?'
+    print 'a room where there is a small cavern entrance on one'
+    print 'side of the room and a heavy looking steel gate on'
+    print 'the other. Which way do you go want to go?'
     print '\n1) Crawl into the a small cave.'
     print '2) Walk through a doorway with a heavy steel gate.'
         
@@ -297,33 +288,32 @@ def journey():
       print "opens up into a large cavern where with a"
       print "dragon!"
       dragonAttack()
-    
-    
-    
+
     
 #### this needs more work############
 
 
-
-
-
-    
-    
-    neverEnding += 111
+    neverEnding += 222
   
   #go to winning the game
   winning()
 
-  
-  
+ 
   
 def winning():
   print "\nyou have won the game"
   print "loot gold: " + str(gold)
   print "loot weapon sharpening: " + str(weaponSharpening)
   print "loot resurrection potion: " + str(resurrectionPotion)
-
- 
+  
+### this is where you die!!!
+def death():
+  global resurrectionPotion
+  if resurrectionPotion >= 1:
+    print "Lucky you had a potion, you awaken several days later"
+    pass
+  else:
+    exit("You died something horrible")
 
  
 ### main function
@@ -338,9 +328,6 @@ def main():
     journey()
   else:
     death()
-       
-
-
 
 
 if __name__ == '__main__': #boilerplate to call main function
