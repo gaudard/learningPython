@@ -12,9 +12,7 @@ from sys import exit
 from os import system
 from random import choice
 import time
-
-# System variables
-systemType = 0
+import platform
 
 # Variables - weapons
 axeOwner = 0
@@ -46,7 +44,7 @@ ______
 | | | | | | | '_ \ / _` |/ _ \/ _ \| '_ \ 
 | |/ /| |_| | | | | (_| |  __/ (_) | | | |
 |___/  \__,_|_| |_|\__, |\___|\___/|_| |_|
-                    __/ |             v0.9       
+                    __/ |             v0.9b       
                    |___/ 
 '''
 
@@ -95,27 +93,18 @@ def dragonBanner():
 
 
 ''' This allows setups up the function to clear the screen'''
-def clearScreen():
-  global systemType
-  while systemType < 1:
-    print "What type of computer are you using?"
-    print "1) Windows"
-    print "2) Linux/OSX"
-    print "3) Don't know"
-    systemType = input('> ')
-  if systemType == 1:
-    system('cls')
-  elif systemType == 2:
-    system('clear')
-  else:
-    pass
 
+def clearScreen():
+  if platform.system() == 'Windows':
+    system('cls')
+  else:
+    system('clear')
 
 ''' ogre attack function, with random chance of surival based on weapon'''
 def ogreAttack():
 
   ogreBanner() 
-  print "\nYou see a large ogre and he doesn't look friendly"
+  print "and he doesn't look friendly"
   raw_input('\n Press enter to continue.> ')
   clearScreen()
   chance1 = choice(range(0,5))
@@ -127,7 +116,6 @@ def ogreAttack():
       print "\nYou slay the ogre with your axe!"
     else:
       print "you slay the ogre with your fists!"
-  print "\nyou didn't die."
   corpseLooter()
 
 
@@ -156,21 +144,20 @@ def corpseLooter():
   if chance2 == 0:
     global weaponSharpening 
     weaponSharpening += 1.1
-    print "you can now sharpen your weapon"
+    print "and you can now sharpen your weapon"
   elif chance2 == 1:
     global gold
     gold += 10
-    print "you have found 10 gold"
+    print "and you have found 10 gold"
   else:
     global resurrectionPotion
-    resurrectionPotion += 0
-    print "you have found one resurrectionPotion"
+    resurrectionPotion += 1
+    print "and you have found one resurrectionPotion"
 
  
 
 def goldenChest():
   chance1 = choice(range(0, 8))
-  print "\n It seems you have some uncontrollable urge to open the chest...\n"
   if chance1 == 0:
     print "You found 10 gold!"
     global gold
@@ -194,10 +181,6 @@ def goldenChest():
   else:
     print "You found an empty box..."
     print "sorry about your luck"
-  print "\n Return to continue"
-  raw_input(' >')
-  clearScreen()
- 
  
 
 
@@ -214,8 +197,9 @@ def death():
  
 ### this is where you crawl!!!
 def crawling():
+  clearScreen()
   print "\nAfter crawling for what seemed like a mile."
-  print "You come into an opeing where an axe is on a stand"
+  print "You come into an opening where an axe is on a stand"
   print "Do you pickup the axe? 'y' or 'n'"
   
   choice1 = raw_input('\n > ')
@@ -225,11 +209,12 @@ def crawling():
   else:
     pass
 
-  next0 = choice(range(0,2))
-  if next0 == 0:
+  chance1 = choice(range(0,2))
+  if chance1 == 0:
+    print "You see a large ogre come out from a hole in the cavern, "
     ogreAttack()
   else:
-    print "\nThere is nothing else to see here so"
+    pass
 
     
     
@@ -258,16 +243,32 @@ def steelGate():
 
     
 def woodenDoor():
-  print "After a brisk downhill walk you find a golden chest."
-  goldenChest()
+  clearScreen()
+  print "After opening the door there is a steep hill,"
+  print "and you decide to walk down the hill where you find"
+  print "a golden chest in the center of a cavern. Do you:"
+  print "\n1) open the chest?"
+  print "2) continue on your journey?"
+  choice1 = raw_input('> ')
+  if choice1 == "1":
+    clearScreen()
+    goldenChest()
+    print "And you see a large ogre come out from behind a boulder, "
+    ogreAttack()
+  else:
+    clearScreen()
+    print "You continue on your journey"
   
 
 ### this is where all the action is called from
 def journey():
   neverEnding = 0
   while neverEnding < 666:
-    print '\nYou continue on your jouney when you come to:\n'
-    print '1) Crawl into the a small cave.'
+    print '\nAs you continue on your jouney you come to'
+    print 'a room where there is a small cave on one side of the'
+    print 'room and a heavy looking steel gate on the other. Which'
+    print 'way do you go?'
+    print '\n1) Crawl into the a small cave.'
     print '2) Walk through a doorway with a heavy steel gate.'
         
     choice0 = raw_input('\n > ')
@@ -286,7 +287,6 @@ def journey():
     choice0 = raw_input('\n > ')
     
     if choice0 == '1':
-      print "opens the wooden door and walks into..."
       woodenDoor()
     elif choice0 == '2':
       print "Opens the door made from bone."
@@ -328,6 +328,7 @@ def winning():
  
 ### main function
 def main():
+  clearScreen()
   banner()
         
   play = raw_input("\nWould you like to play the game?\n 'y' or 'n' > ")
