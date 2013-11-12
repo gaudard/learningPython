@@ -5,6 +5,9 @@
 # http://learnpythonthehardway.org/book/ex36.html
 # Dungeon game
 # @jgaudard
+
+#future ideas: 
+#def attacking() which asks for weapon to use, uses modifiers, drop weapons
 ##################################################
 
 #imports required for program to run
